@@ -11884,3 +11884,922 @@ Processing by DailyReportsController#index as */*
   [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
   [1m[36mDailyReport Load (0.0ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
 Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children" for ::1 at 2016-06-09 12:58:09 -0700
+Processing by ChildrenController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "children"[0m
+  [1m[35mChild Load (0.1ms)[0m  SELECT "children".* FROM "children"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "children".* FROM "children"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "children".* FROM "children"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "children"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "children".* FROM "children"
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT SUM(poopy_diapers) AS sum_poopy_diapers, child_id AS child_id FROM "children" INNER JOIN "daily_reports" ON "daily_reports"."child_id" = "children"."id" GROUP BY "child_id"
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.2ms)[0m  SELECT  "daily_reports".* FROM "daily_reports"  ORDER BY "daily_reports"."poopy_diapers" DESC LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "children".* FROM "children"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?[0m  [["giver_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "children".* FROM "children"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?[0m  [["giver_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?  [["giver_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?[0m  [["giver_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "children".* FROM "children"
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?[0m  [["recipient_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "children".* FROM "children"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?[0m  [["recipient_id", 1]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?  [["recipient_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?[0m  [["recipient_id", 2]]
+  [1m[35mChild Load (0.1ms)[0m  SELECT "children".* FROM "children" WHERE (bully_rating > 2)
+  Rendered children/index.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 64ms (Views: 61.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/children/1" for ::1 at 2016-06-09 13:49:21 -0700
+Processing by ChildrenController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?[0m  [["giver_id", 1]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?  [["recipient_id", 1]]
+  [1m[36mDailyReport Load (0.0ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered children/show.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 50ms (Views: 48.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:49:22 -0700
+Processing by DailyReportsController#index as HTML
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.0ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:49:23 -0700
+Processing by DailyReportsController#index as HTML
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.0ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/daily_reports_ajax.self-925ef82b486da470d2b52012b3a0d0aa68451415128bbcfee879c619268d8e49.js?body=1" for ::1 at 2016-06-09 13:49:25 -0700
+
+
+Started GET "/children/1" for ::1 at 2016-06-09 13:49:53 -0700
+Processing by ChildrenController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?  [["giver_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?[0m  [["recipient_id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+  Rendered daily_reports/_daily_report.html.erb (0.2ms)
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered children/show.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 44ms (Views: 42.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/children.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/daily_reports.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/kind_acts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/application.self-5aa8ad6ecbd98d0c443300b971e591162e5ddeed8f8094762b62ca91006c2155.css?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/children.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/daily_reports_ajax.self-925ef82b486da470d2b52012b3a0d0aa68451415128bbcfee879c619268d8e49.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/assets/kind_acts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:49:53 -0700
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:49:55 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1" for ::1 at 2016-06-09 13:49:57 -0700
+Processing by ChildrenController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mChild Load (0.0ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?[0m  [["giver_id", 1]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?  [["recipient_id", 1]]
+  [1m[36mDailyReport Load (0.0ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered children/show.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 44ms (Views: 42.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/children.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/daily_reports.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/kind_acts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/application.self-5aa8ad6ecbd98d0c443300b971e591162e5ddeed8f8094762b62ca91006c2155.css?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/children.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/daily_reports_ajax.self-925ef82b486da470d2b52012b3a0d0aa68451415128bbcfee879c619268d8e49.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/kind_acts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for ::1 at 2016-06-09 13:49:58 -0700
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:49:59 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1" for ::1 at 2016-06-09 13:50:01 -0700
+Processing by ChildrenController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mChild Load (0.0ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?  [["giver_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?[0m  [["recipient_id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered children/show.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 39ms (Views: 37.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/children.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/application.self-5aa8ad6ecbd98d0c443300b971e591162e5ddeed8f8094762b62ca91006c2155.css?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/daily_reports.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/kind_acts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/children.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/daily_reports_ajax.self-925ef82b486da470d2b52012b3a0d0aa68451415128bbcfee879c619268d8e49.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/kind_acts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for ::1 at 2016-06-09 13:50:01 -0700
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:50:02 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.0ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:50:03 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.0ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:50:04 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.0ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1" for ::1 at 2016-06-09 13:50:15 -0700
+Processing by ChildrenController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mChild Load (0.0ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?[0m  [["giver_id", 1]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?  [["recipient_id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered children/show.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 146ms (Views: 144.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/children.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/application.self-5aa8ad6ecbd98d0c443300b971e591162e5ddeed8f8094762b62ca91006c2155.css?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/kind_acts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/daily_reports.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/children.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/kind_acts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/daily_reports_ajax.self-064a18930064c93a83c2783225161e6590e8010f194a14fcf211a3ff2792da44.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for ::1 at 2016-06-09 13:50:15 -0700
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:50:16 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.0ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:50:17 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.0ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:50:18 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1" for ::1 at 2016-06-09 13:53:11 -0700
+Processing by ChildrenController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mChild Load (0.0ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?  [["giver_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?[0m  [["recipient_id", 1]]
+  [1m[35mDailyReport Load (0.0ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered children/show.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 144ms (Views: 142.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/children.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/kind_acts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/daily_reports.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/application.self-5aa8ad6ecbd98d0c443300b971e591162e5ddeed8f8094762b62ca91006c2155.css?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/daily_reports_ajax.self-19589c1be53f854d94fa0de7e9d5b6a88bb6b4ec94269277a0c051f4c2bcdc99.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/children.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/kind_acts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for ::1 at 2016-06-09 13:53:12 -0700
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:53:17 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1" for ::1 at 2016-06-09 13:54:42 -0700
+Processing by ChildrenController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?[0m  [["giver_id", 1]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?  [["recipient_id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered children/show.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 162ms (Views: 160.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/children.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/kind_acts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/daily_reports.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/application.self-5aa8ad6ecbd98d0c443300b971e591162e5ddeed8f8094762b62ca91006c2155.css?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/children.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/daily_reports_ajax.self-147f4830ce856ad1313573107c16ac3938f2789461a4d8acbbc7832d6c5ad7fb.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/kind_acts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for ::1 at 2016-06-09 13:54:42 -0700
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:54:43 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1" for ::1 at 2016-06-09 13:55:35 -0700
+Processing by ChildrenController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mChild Load (0.0ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?  [["giver_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?[0m  [["recipient_id", 1]]
+  [1m[35mDailyReport Load (0.0ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered daily_reports/_daily_report.html.erb (0.2ms)
+  Rendered children/show.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 157ms (Views: 155.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/children.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/daily_reports.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/kind_acts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/application.self-5aa8ad6ecbd98d0c443300b971e591162e5ddeed8f8094762b62ca91006c2155.css?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/daily_reports_ajax.self-4c8e8a1944697310dad72552f24aa8eea2b42c37a3e3682f188993501e483762.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/children.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/kind_acts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for ::1 at 2016-06-09 13:55:36 -0700
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:55:38 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1" for ::1 at 2016-06-09 13:56:11 -0700
+Processing by ChildrenController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mChild Load (0.0ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?[0m  [["giver_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?  [["recipient_id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered children/show.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 146ms (Views: 144.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/children.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/daily_reports.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/kind_acts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/application.self-5aa8ad6ecbd98d0c443300b971e591162e5ddeed8f8094762b62ca91006c2155.css?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/children.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/daily_reports_ajax.self-81828ce72f27a1de0152c0923d1d652b778a64e636dc2ac029dffb43139fa31e.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/kind_acts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for ::1 at 2016-06-09 13:56:11 -0700
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:56:13 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:56:16 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.0ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+Completed 200 OK in 3ms (Views: 1.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:56:17 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 0.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/children/1/daily_reports/new" for ::1 at 2016-06-09 13:56:44 -0700
+Processing by DailyReportsController#new as HTML
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mChild Load (0.2ms)[0m  [1mSELECT "children".* FROM "children"[0m
+  Rendered daily_reports/_form.html.erb (11.0ms)
+  Rendered daily_reports/new.html.erb within layouts/application (12.3ms)
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 200 OK in 61ms (Views: 58.5ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/children/1/daily_reports" for ::1 at 2016-06-09 13:56:55 -0700
+Processing by DailyReportsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5pZTHhOgVXuGUZzsAVX45oMWYONBTJoWqHIE/T885vumvRSgJa0FWjd9IGAyFLGPZFxuPouKrblq3+FFFhwcrg==", "daily_report"=>{"date(1i)"=>"2016", "date(2i)"=>"6", "date(3i)"=>"8", "wet_diapers"=>"0", "poopy_diapers"=>"0", "bullying_incident"=>"0", "bullying_report"=>"", "ouch_incident"=>"0", "ouch_report"=>"", "kind_acts_attributes"=>{"0"=>{"giver_id"=>"1", "act"=>"", "recipient_id"=>""}}, "observations_attributes"=>{"0"=>{"child_id"=>"1", "content"=>"efef", "guide_name"=>"efef"}}}, "commit"=>"Create Daily report", "child_id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameter: child_id
+  [1m[35mGuide Load (0.1ms)[0m  SELECT  "guides".* FROM "guides" WHERE "guides"."name" = ? LIMIT 1  [["name", "efef"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "guides" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "efef"], ["created_at", "2016-06-09 20:56:56.010686"], ["updated_at", "2016-06-09 20:56:56.010686"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "daily_reports" ("wet_diapers", "poopy_diapers", "bullying_report", "ouch_report", "date", "child_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["wet_diapers", 0], ["poopy_diapers", 0], ["bullying_report", ""], ["ouch_report", ""], ["date", "2016-06-08"], ["child_id", 1], ["created_at", "2016-06-09 20:56:56.016105"], ["updated_at", "2016-06-09 20:56:56.016105"]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "observations" ("content", "guide_id", "daily_report_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["content", "efef"], ["guide_id", 3], ["daily_report_id", 4], ["created_at", "2016-06-09 20:56:56.017400"], ["updated_at", "2016-06-09 20:56:56.017400"]]
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "kind_acts" ("act", "giver_id", "daily_report_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["act", ""], ["giver_id", 1], ["daily_report_id", 4], ["created_at", "2016-06-09 20:56:56.018251"], ["updated_at", "2016-06-09 20:56:56.018251"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/children/1
+Completed 302 Found in 22ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/children/1" for ::1 at 2016-06-09 13:56:56 -0700
+Processing by ChildrenController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?  [["giver_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?[0m  [["recipient_id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered daily_reports/_daily_report.html.erb (0.3ms)
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered children/show.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 53ms (Views: 51.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-09 13:57:00 -0700
+Processing by DailyReportsController#index as */*
+  Parameters: {"child_id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms)
