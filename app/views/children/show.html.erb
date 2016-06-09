@@ -12,9 +12,13 @@
     <%=link_to "edit profile", edit_child_path(@child) %>
     <%= link_to "delete profile", child_path(@child), method: :delete, data: { confirm: "Are you sure?"} %></br></br>
     <h3><%=@child.name%>'s Daily Reports</h3>
+		<p><%= link_to "See index of reports", child_daily_reports_path(@child), class: "reports-link" %></p>
     <p><%= link_to "Create a new report", new_child_daily_report_path(@child) %></p>
-    <% @child.daily_reports.each do |d| %>
+		<ul>
+			<div class="report-area"></div>
+		</ul>
+		<!-- <% @child.daily_reports.each do |d| %>
       <%= render partial: 'daily_reports/daily_report', locals: {d: d, child: @child} %>
-    <% end %>
+    <% end %> -->
   </div>
 </div>

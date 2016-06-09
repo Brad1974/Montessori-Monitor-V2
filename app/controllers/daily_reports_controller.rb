@@ -1,6 +1,12 @@
 class DailyReportsController < ApplicationController
   before_action :set_child
 
+  def index
+    @daily_reports = @child.daily_reports
+    # render 'daily_reports/index', layout: false
+    render json: @daily_reports
+  end
+
   def show
     @daily_report = @child.daily_reports.find(params[:id])
   end

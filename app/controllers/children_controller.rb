@@ -8,6 +8,11 @@ before_action :authenticate_user!#, except: [:index]
     @child = Child.find(params[:id])
   end
 
+  def post_data
+    child = Child.find(params[:id])
+    render json: child.to_json
+  end
+
   def new
     @child = Child.new
   end
