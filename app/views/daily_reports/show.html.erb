@@ -1,0 +1,43 @@
+<h2 class ="top_banner">Daily Report for <%= @daily_report.child.name %></h2>
+<div class="col-md-8 col-md-offset-2">
+<div class="main-content">
+
+	<p><b>Date:</b> <%= @daily_report.date.strftime("%b %d, %Y") %></p>
+	<p><b>Diaper Changes:</b> </p>
+	<ul><li>Wet diapers: <%= @daily_report.wet_diapers %></li>
+	<li><p>Poopy diapers: <%= @daily_report.poopy_diapers %></li></ul>
+
+	<% if @daily_report.bullying_incident %>
+		<p><b>Bullying Incident:</b></p>
+		<ul>
+			<li><%= @daily_report.bullying_report %></li>
+		</ul>
+	<% end %>
+
+	<% if @daily_report.ouch_incident %>
+		<p><b>Ouch Report:</b></p>
+		<ul>
+			<li><%= @daily_report.ouch_report %></li>
+		</ul>
+	<% end %>
+
+	<% if @daily_report.kind_acts.count > 0 %>
+		<p><b>Act of Kindness!</b></p>
+		<ul>
+		<li><%= @daily_report.kind_acts.last.act %></li>
+	</ul>
+<% end %>
+
+
+	<p><b>Guide Observations:</b></p>
+	<ul>
+		<% @daily_report.observations.each do |o| %>
+			<li><%= o.guide.name %> noted: <%= o.content %></li>
+		<% end %>
+	</ul>
+	<br>
+
+
+	<p class="top_banner"> <%= link_to "Back to #{@child.name}'s profile", child_path(@child) %></p>
+</div>
+</div>

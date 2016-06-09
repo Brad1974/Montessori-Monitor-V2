@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MontessoriMonitor</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="top_banner"><h1>Montessori Monitor</h1></div>
+<div class="navbar">
+      <ul class = "nav_ul">
+        <% if user_signed_in? %>
+          <li><%= link_to "Child Roster", children_path %></li>
+          <li><%= link_to "register new child", new_child_path %></li>
+          <li><%= link_to "sign out", destroy_user_session_path, method: "delete"  %></li>
+        <% else %>
+          <li><%= link_to "sign in", new_user_session_path %></li>
+          <li><%= link_to "sign in with facebook", user_omniauth_authorize_path(:facebook) %></li>
+          <li><%= link_to "sign up as a new user", new_user_registration_path %></li>
+          <% end %>
+      </ul>
+    </div>
+
+
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<%= yield %>
+
+</body>
+</html>

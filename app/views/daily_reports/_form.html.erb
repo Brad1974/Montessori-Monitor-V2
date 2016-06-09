@@ -1,0 +1,56 @@
+<% if @daily_report.errors.any? %>
+  <div id= "error explanation">
+    <h3>
+        Some errors prohibited this report from being saved:
+    </h3>
+
+    <ul>
+    <% @daily_report.errors.full_messages.each do |msg| %>
+      <% if !msg.include?("Observations") %>
+        <li><%= msg %></li>
+      <% else %>
+        <% @daily_report.observations.last.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        <% end %>
+    <% end %>
+    </ul>
+
+  </div>
+<% end %>
+
+<%= form_for [@child, @daily_report] do |f| %>
+<div class="col-md-8 col-md-offset-2">
+  <div class = "form-content"
+
+  <p><%= f.label :date %> <%= f.date_select :date, { :start_year => Time.now.year, :end_year => Time.now.year} %></p>
+  <p><%= f.label :wet_diapers %> <%= f.select :wet_diapers, ((0..10).map {|i| [i,i] }) %></p>
+  <p><%= f.label :poopy_diapers %> <%= f.select :poopy_diapers, ((0..10).map {|i| [i,i] }) %></p>
+  <p><%= f.label "Any bullying today?" %><%= f.check_box :bullying_incident %>
+  <p><%= f.label :bullying_report %></br><%= f.text_area :bullying_report %></p>
+  <p><%= f.label "Any ouches today?" %><%= f.check_box :ouch_incident %>
+  <p><%= f.label :ouch_report %></br><%= f.text_area :ouch_report %></p>
+
+  <h3> Kind Acts </h3>
+
+  <%= f.fields_for :kind_acts, @kind_act do |ka| %>
+    <%= ka.hidden_field :giver_id %>
+    <%= ka.label "Any kind acts performed?" %></br>
+    <%= ka.text_area :act %></br>
+    <%= ka.label "Who was the recipient of the kind act?" %>
+    <%= ka.collection_select :recipient_id, Child.all, :id, :name, include_blank: 'Choose a child' %>
+  <% end %>
+
+
+
+  <h3> Observations </h3>
+  <%= f.fields_for :observations, @observation do |o| %>
+    <%= o.hidden_field :child_id %>
+    <%= o.label :content %></br> <%= o.text_area :content %></br>
+    <%= o.label :guide_name %></br> <%= o.text_field :guide_name %>
+  <% end %></br></br>
+
+  <%= f.submit %>
+  </div>
+</div>
+<% end %>
