@@ -45,8 +45,10 @@ class DailyReport < ActiveRecord::Base
   end
 
   def kind_acts_attributes=(attributes)
-    attributes.each do |index, kind_act_hash|
-      self.kind_acts.build(kind_act_hash)
+    if attributes["0"]["act"].length > 0
+      attributes.each do |index, kind_act_hash|
+        self.kind_acts.build(kind_act_hash)
+      end
     end
   end
 
