@@ -16498,3 +16498,227 @@ Processing by DailyReportsController#index as */*
   [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
   [1m[35mDailyReport Load (0.1ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
 Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-10 06:27:22 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by DailyReportsController#index as JSON
+  Parameters: {"child_id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.2ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with DailyReport::ActiveRecord_Associations_CollectionProxy (0.75ms)
+Completed 200 OK in 79ms (Views: 33.3ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/children/1/daily_reports/1" for ::1 at 2016-06-10 06:27:23 -0700
+Processing by DailyReportsController#show as HTML
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1  [["child_id", 1], ["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."daily_report_id" = ?[0m  [["daily_report_id", 1]]
+  [1m[35mKindAct Load (0.1ms)[0m  SELECT  "kind_acts".* FROM "kind_acts" WHERE "kind_acts"."daily_report_id" = ?  ORDER BY "kind_acts"."id" DESC LIMIT 1  [["daily_report_id", 1]]
+  [1m[36mObservation Load (0.2ms)[0m  [1mSELECT "observations".* FROM "observations" WHERE "observations"."daily_report_id" = ?[0m  [["daily_report_id", 1]]
+  [1m[35mGuide Load (0.1ms)[0m  SELECT  "guides".* FROM "guides" WHERE "guides"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered daily_reports/show.html.erb within layouts/application (28.1ms)
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 395ms (Views: 391.4ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 06:27:26 -0700
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1[0m  [["child_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with DailyReport (0.39ms)
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 06:27:27 -0700
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1  [["child_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with DailyReport (0.46ms)
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 07:09:18 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1[0m  [["child_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with DailyReport (0.62ms)
+Completed 200 OK in 76ms (Views: 17.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 07:12:35 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1[0m  [["child_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 200 OK in 74ms (Views: 14.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/children" for ::1 at 2016-06-10 07:12:47 -0700
+Processing by ChildrenController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "children"
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT "children".* FROM "children"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "children".* FROM "children"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "children".* FROM "children"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "children"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "children".* FROM "children"[0m
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT SUM(poopy_diapers) AS sum_poopy_diapers, child_id AS child_id FROM "children" INNER JOIN "daily_reports" ON "daily_reports"."child_id" = "children"."id" GROUP BY "child_id"[0m
+  [1m[35mChild Load (0.0ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT  "daily_reports".* FROM "daily_reports"  ORDER BY "daily_reports"."poopy_diapers" DESC LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "children".* FROM "children"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?  [["giver_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "children".* FROM "children"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?  [["giver_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?[0m  [["giver_id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?  [["giver_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "children".* FROM "children"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?  [["recipient_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "children".* FROM "children"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?  [["recipient_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?[0m  [["recipient_id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?  [["recipient_id", 2]]
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT "children".* FROM "children" WHERE (bully_rating > 2)[0m
+  Rendered children/index.html.erb within layouts/application (27.3ms)
+Completed 200 OK in 291ms (Views: 284.8ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/children/1" for ::1 at 2016-06-10 07:12:49 -0700
+Processing by ChildrenController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mChild Load (0.0ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."giver_id" = ?  [["giver_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."recipient_id" = ?[0m  [["recipient_id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?  [["child_id", 1]]
+  Rendered daily_reports/_daily_report.html.erb (0.5ms)
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered daily_reports/_daily_report.html.erb (0.1ms)
+  Rendered children/show.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 50ms (Views: 48.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/children/1/daily_reports" for ::1 at 2016-06-10 07:12:52 -0700
+Processing by DailyReportsController#index as JSON
+  Parameters: {"child_id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ?[0m  [["child_id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with DailyReport::ActiveRecord_Associations_CollectionProxy (0.65ms)
+Completed 200 OK in 10ms (Views: 7.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/children/1/daily_reports/1" for ::1 at 2016-06-10 07:12:52 -0700
+Processing by DailyReportsController#show as HTML
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1[0m  [["child_id", 1], ["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "kind_acts" WHERE "kind_acts"."daily_report_id" = ?  [["daily_report_id", 1]]
+  [1m[36mKindAct Load (0.1ms)[0m  [1mSELECT  "kind_acts".* FROM "kind_acts" WHERE "kind_acts"."daily_report_id" = ?  ORDER BY "kind_acts"."id" DESC LIMIT 1[0m  [["daily_report_id", 1]]
+  [1m[35mObservation Load (0.1ms)[0m  SELECT "observations".* FROM "observations" WHERE "observations"."daily_report_id" = ?  [["daily_report_id", 1]]
+  [1m[36mGuide Load (0.1ms)[0m  [1mSELECT  "guides".* FROM "guides" WHERE "guides"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered daily_reports/show.html.erb within layouts/application (25.2ms)
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 200 OK in 102ms (Views: 98.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 07:12:58 -0700
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1  [["child_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 07:12:59 -0700
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1[0m  [["child_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 07:13:23 -0700
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1  [["child_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 49ms (Views: 17.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 07:14:00 -0700
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1[0m  [["child_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 200 OK in 48ms (Views: 17.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 07:14:26 -0700
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1  [["child_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with DailyReport (0.42ms)
+Completed 200 OK in 36ms (Views: 10.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 07:14:35 -0700
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1[0m  [["child_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with DailyReport (0.68ms)
+Completed 200 OK in 39ms (Views: 14.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 07:14:38 -0700
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1  [["child_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with DailyReport (0.48ms)
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 07:15:45 -0700
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[35mChild Load (0.1ms)[0m  SELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mDailyReport Load (0.1ms)[0m  [1mSELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1[0m  [["child_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+[active_model_serializers] Rendered DailyReportSerializer with ActiveModelSerializers::Adapter::Attributes (0.2ms)
+Completed 200 OK in 54ms (Views: 21.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/children/1/daily_reports/1.json" for ::1 at 2016-06-10 07:18:38 -0700
+Processing by DailyReportsController#show as JSON
+  Parameters: {"child_id"=>"1", "id"=>"1"}
+  [1m[36mChild Load (0.1ms)[0m  [1mSELECT  "children".* FROM "children" WHERE "children"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDailyReport Load (0.1ms)[0m  SELECT  "daily_reports".* FROM "daily_reports" WHERE "daily_reports"."child_id" = ? AND "daily_reports"."id" = ? LIMIT 1  [["child_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+[active_model_serializers]   [1m[35mKindAct Load (0.1ms)[0m  SELECT "kind_acts".* FROM "kind_acts" WHERE "kind_acts"."daily_report_id" = ?  [["daily_report_id", 1]]
+[active_model_serializers]   [1m[36mObservation Load (0.1ms)[0m  [1mSELECT "observations".* FROM "observations" WHERE "observations"."daily_report_id" = ?[0m  [["daily_report_id", 1]]
+[active_model_serializers] Rendered DailyReportSerializer with ActiveModelSerializers::Adapter::Attributes (33.4ms)
+Completed 200 OK in 65ms (Views: 41.3ms | ActiveRecord: 1.7ms)

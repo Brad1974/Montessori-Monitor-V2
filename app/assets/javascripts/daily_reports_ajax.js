@@ -5,7 +5,7 @@ ready = function() {
     $('a.reports-link').on('click', function(e){
       e.preventDefault();
       var link = $(this).attr('href')
-      $.get($('a.reports-link').attr('href'), function(data){
+      $.getJSON($('a.reports-link').attr('href'), function(data){
         var reportList = ""
         data.forEach(function(details) {
           var dailyReport = "<li><a href= '/children/" + details.child_id + "/daily_reports/" + details.id + "'>" + details.date + "</a></li> ";

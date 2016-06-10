@@ -3,12 +3,18 @@ class DailyReportsController < ApplicationController
 
   def index
     @daily_reports = @child.daily_reports
-    # render 'daily_reports/index', layout: false
-    render json: @daily_reports
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @daily_reports }
+    end
   end
 
   def show
     @daily_report = @child.daily_reports.find(params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @daily_report}
+    end
   end
 
   def new
