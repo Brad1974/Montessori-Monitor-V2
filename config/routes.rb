@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :children do
     resources :daily_reports
   end
+  resources :observations
 
   root 'children#index'
 

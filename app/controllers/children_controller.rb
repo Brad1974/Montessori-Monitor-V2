@@ -2,10 +2,20 @@ class ChildrenController < ApplicationController
 before_action :authenticate_user!#, except: [:index]
   def index
     @children = Child.all
+    # render json: @children
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @children }
+    end
   end
 
   def show
     @child = Child.find(params[:id])
+    # render json: @child
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @child }
+    end
   end
 
   def post_data

@@ -10,10 +10,11 @@ class ObservationsController < ApplicationController
 
   def show
     @observation = Observation.find(params[:id])
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @observation}
-    end
+    render json: @observation
+    # respond_to do |format|
+    #   format.html { render :show }
+    #   format.json { render json: @observation}
+    # end
   end
 
 end

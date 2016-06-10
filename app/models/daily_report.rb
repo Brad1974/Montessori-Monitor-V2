@@ -40,7 +40,7 @@ class DailyReport < ActiveRecord::Base
 
   def observations_attributes=(attributes)
     attributes.each do |index, observation_hash|
-      self.observations.build(content: observation_hash[:content], guide: Guide.find_or_create_by(name: observation_hash[:guide_name]))
+      self.observations.build(child_id: observation_hash[:child_id], content: observation_hash[:content], guide: Guide.find_or_create_by(name: observation_hash[:guide_name]))
     end
   end
 

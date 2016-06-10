@@ -8,7 +8,9 @@ ready = function() {
       $.getJSON($('a.reports-link').attr('href'), function(data){
         var reportList = ""
         data.forEach(function(details) {
+
           var dailyReport = "<li><a href= '/children/" + details.child_id + "/daily_reports/" + details.id + "'>" + details.date + "</a></li> ";
+          debugger
           reportList += dailyReport;
         })
         $('.report-area').html(reportList);

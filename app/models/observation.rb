@@ -4,6 +4,7 @@ class Observation < ActiveRecord::Base
   #validate :guide_name_present
   belongs_to :daily_report
   belongs_to :guide
+  belongs_to :child
 
   def guide_name
     self.guide.name if guide
