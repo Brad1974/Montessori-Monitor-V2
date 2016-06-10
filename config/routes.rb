@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resources :daily_reports
   end
   resources :observations
+  resources :kind_acts
+  resources :guides
 
   root 'children#index'
 
