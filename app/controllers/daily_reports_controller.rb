@@ -12,11 +12,11 @@ class DailyReportsController < ApplicationController
 
   def show
     @daily_report = @child.daily_reports.find(params[:id])
-    render json: @daily_report
-    # respond_to do |format|
-    #   format.html { render :show }
-    #   format.json { render json: @daily_report}
-    # end
+    # render json: @daily_report
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @daily_report}
+    end
   end
 
   def new
