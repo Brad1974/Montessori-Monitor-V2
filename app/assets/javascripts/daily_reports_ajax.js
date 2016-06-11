@@ -1,11 +1,12 @@
 var ready;
 ready = function() {
 
+// roster ajax functions
+
   function loadRoster(){
     $.getJSON("/children", function(data){
       var childList = ""
       data.forEach(function(details) {
-        debugger;
         var link = "<li class='cn'><a href= '/children/" + details.id + "'>" + details.first_name + " " + details.last_name + "</a></li> ";
         childList += link;
       })
@@ -13,6 +14,22 @@ ready = function() {
     })
   }
   loadRoster();
+
+  function loadProfile(){
+    $('.roster').on('click', 'a', function(e){
+      e.preventDefault();
+      var link = $(this).attr('href')
+      $.getJSON(link, function(data){debugger; });
+
+
+    })
+  }
+
+  loadProfile();
+
+
+// Child Show page ajax functions
+
 
   function DailyReport(child_id, date, poopy_diapers, wet_diapers, bullying_report, ouch_report){
     this.date = date;
