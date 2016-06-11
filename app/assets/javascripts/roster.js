@@ -1,3 +1,4 @@
+var childLine
 var ready;
 ready = function() {
 
@@ -13,8 +14,10 @@ ready = function() {
     var lineSix = " <p> Allergies? " + this.allergies + "</p> "
     var lineSeven = " <p> Current Diaper Inventory: " + this.diapers_inventory + "</p> "
     var lineEight = " <p><a href= '/children/" + this.id + "'>Click here to visit " + this.first_name + "'s Full Page</a></p>"
-    var template = lineZero +lineOne + lineTwo + lineThree + lineFour + lineFive + lineSix + lineSeven + lineEight
-    $('#temp').html(template);
+    var template ="<div class='profile'>" + lineZero +lineOne + lineTwo + lineThree + lineFour + lineFive + lineSix + lineSeven + lineEight +"</div>"
+    if ($(childLine).find('h1').length === 0) {
+    $(childLine).append(template);}
+    else {$(childLine).find('.profile').remove() }
   }
 
   function Child(id, last_name, first_name, birthdate, allergies, diapers_inventory, bully_rating, ouch_rating, kind_acts, gifts){
@@ -31,7 +34,6 @@ ready = function() {
   }
 
   function buildChild(data){
-
     var newChild = new Child(data.id, data.last_name, data.first_name, data.birthdate, data.allergies, data.diapers_inventory, data.bully_rating, data.ouch_rating, data.kind_acts.length, data.gifts.length);
     newChild.insertIntoPage();
   }
@@ -43,7 +45,7 @@ ready = function() {
       $.getJSON("/children", function(data){
         var childList = ""
         data.forEach(function(details) {
-          var link = "<li class='cn'><a href= '/children/" + details.id + "'>" + details.first_name + " " + details.last_name + "</a></li> ";
+          var link = "<div class='child-line'><li><a href= '/children/" + details.id + "'>" + details.first_name + " " + details.last_name + "</a></li></div> ";
           childList += link;
         })
         $('.roster').html(childList);
@@ -54,9 +56,10 @@ ready = function() {
     function loadProfile(){
       $('.roster').on('click', 'a', function(e){
         e.preventDefault();
-        var link = $(this).attr('href')
-        $.getJSON(link, function(data){})
-        .done(buildChild);
+        childLine = $(this).closest('div')
+        var url = $(this).attr('href')
+        $.getJSON(url, function(data){})
+        .done(buildChild)
       })
     }
 
