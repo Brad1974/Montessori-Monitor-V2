@@ -2,7 +2,14 @@ var childLine
 var ready;
 ready = function() {
 
-  // roster ajax functions
+  $('.class-stats').hide();
+
+  function loadStats(){
+    $('#stat-button').on('click', function(){
+      $('.class-stats').toggle();
+    })
+  }
+  loadStats();
 
   Child.prototype.insertIntoPage = function(){
     var lineZero = "<h1> " + this.first_name + " " + this.last_name + "</h1>"
@@ -38,37 +45,34 @@ ready = function() {
     newChild.insertIntoPage();
   }
 
-
-
-
-    function loadRoster(){
-      $.getJSON("/children", function(data){
-        var childList = ""
-        data.forEach(function(details) {
-          var link = "<div class='child-line'><li><a href= '/children/" + details.id + "'>" + details.first_name + " " + details.last_name + "</a></li></div> ";
-          childList += link;
-        })
-        $('.roster').html(childList);
+  function loadRoster(){
+    $.getJSON("/children", function(data){
+      var childList = ""
+      data.forEach(function(details) {
+        var link = "<div class='child-line'><li><a class= 'child-a' href= '/children/" + details.id + "'>" + details.first_name + " " + details.last_name + "</a></li></div> ";
+        childList += link;
       })
-    }
-    loadRoster();
+      if (childList.length > 0) {
+        $('.roster').html(childList)}
+      else {
+        $('.roster').html("<p>There are no children enrolled yet</p>")
+      }
+    })
+  }
 
-    function loadProfile(){
-      $('.roster').on('click', 'a', function(e){
-        e.preventDefault();
-        childLine = $(this).closest('div')
-        var url = $(this).attr('href')
-        $.getJSON(url, function(data){})
-        .done(buildChild)
-      })
-    }
+  loadRoster();
 
+  function loadProfile(){
+    $('.roster').on('click', 'a.child-a', function(e){
+      e.preventDefault();
+      childLine = $(this).closest('div')
+      var url = $(this).attr('href')
+      $.getJSON(url, function(data){})
+      .done(buildChild)
+    })
+  }
 
-    loadProfile();
-
-
-
-
+  loadProfile();
 
 };
 
