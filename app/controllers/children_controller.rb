@@ -57,7 +57,8 @@ before_action :authenticate_user!#, except: [:index]
     @child = Child.find(params[:id])
     @child.daily_reports.destroy_all
     @child.destroy
-    redirect_to root_path
+    # redirect_to root_path
+    render json: @child
 end
 
   private
