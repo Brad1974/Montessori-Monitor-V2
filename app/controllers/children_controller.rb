@@ -9,6 +9,10 @@ before_action :authenticate_user!#, except: [:index]
     end
   end
 
+  def allononepage
+    render :allononepage
+  end
+
   def show
     @child = Child.find(params[:id])
     # render json: @child
