@@ -10,6 +10,11 @@ class DailyReportsController < ApplicationController
     # end
   end
 
+  def indexdates
+    @daily_reportdates = @child.daily_reports.collect {|d| [d.date, d.id, d.child_id]}
+    render json: @daily_reportdates
+  end
+
   def show
     @daily_report = @child.daily_reports.find(params[:id])
     # render json: @daily_report
