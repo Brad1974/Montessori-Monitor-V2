@@ -68,12 +68,15 @@ ready = function() {
 
   function deleteChild(){
     $('.roster').on('click', 'a.delete', function(event){
+      var choice = confirm('Do you really want to delete this record?');
+      if(choice === true) {
       event.stopPropagation();
       var url = "/children/" + $(this).data('details')
       $.ajax({url: url, type: "DELETE"})
       .done(function(success){
         $('div [data-details=' +success.id +']').parent().remove()
       });
+    };
     });
 
   };
