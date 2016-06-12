@@ -2,17 +2,14 @@ var newReport
 var ready;
 ready = function() {
 
-
-
   function loadReportIndex(){
     $('a.reports-link').on('click', function(event){
       event.preventDefault();
       var url = $(this).attr('href')
       $.getJSON(url, function(data){
-        debugger;
         var reportList = "";
         data.forEach(function(details) {
-        var dailyReport = "<li class='rl'><a href= '/children/" + details[2] + "/daily_reports/" + details[1] + "'>" + details[0] + "</a></li> ";
+        var dailyReport = "<div class='dr'><li class='rl'><a href= '/children/" + details[2] + "/daily_reports/" + details[1] + "'>" + details[0] + "</a></li></div> ";
         reportList += dailyReport;
         })
         $('.report-area').html(reportList);
@@ -33,56 +30,42 @@ ready = function() {
   }
   //
   function buildDailyReport(data){
-    report = new Child(data.child_id, data.poopy_diapers, data.wet_diapers, data.bullying_report, data.ouch_report);
+    report = new DailyReport(data.child_id, data.date, data.poopy_diapers, data.wet_diapers, data.bullying_report, data.ouch_report, data.kind_acts, data.observations);
+
     report.insertIntoPage();
   }
   //
-  // DailyReport.prototype.insertIntoPage = function(){
-  //   var lineZero = "<p> Date: " + this.date "</p> "
-  //   var lineOne = "<p> Diaper Changes:</p><ul> "
-  //   var lineTwo = "<li> Wet Diapers: " + this.wet_diapers + "</li> "
-  //   var lineThree = "<li> Poopy Diapers: " + this.poopy_diapers + "</li></ul> "
-  //   if (this.bullying_report.length > 0) {
-  //   var lineFour = " <p> Bullying Incident: " + this.bullying_report + "</p> "} else {var lineFour = ""};
-  //   if (this.ouch_report.length > 0) {
-  //   var lineFive = " <p> Ouch Incident: " + this.ouch_report + "</p> "} else {var lineFive = ""};
-  //   var template ="<div class='report'>" + lineZero +lineOne + lineTwo + lineThree + lineFour + lineFive +"</div>"
-  //   if ($(childLine).find('h1').length === 0) {
-  //   $(childLine).append(template);}
-  //   else {$(childLine).find('.profile').remove() }
-  // }
+  DailyReport.prototype.insertIntoPage = function(){
+    var lineZero = "</br><hr><p> Date: " + this.date + "</p> ";
+    var lineOne = "<p> Diaper Changes:</p><ul> ";
+    var lineTwo = "<li> Wet Diapers: " + this.wet_diapers + "</li> ";
+    var lineThree = "<li> Poopy Diapers: " + this.poopy_diapers + "</li></ul> ";
+    if (this.bullying_report.length > 0) {
+    var lineFour = "<p> Bullying Incident: " + this.bullying_report + "</p> "} else {var lineFour = ""};
+    if (this.ouch_report.length > 0) {
+    var lineFive = "<p> Ouch Incident: " + this.ouch_report + "</p>"} else {var lineFive = ""};
+    if (this.kind_acts.length > 0) {
+    var lineSix = "<p> Kind Acts Observed Today: " + this.kind_acts[0].act + "</p>"} else {var lineFive = ""};
+    var template ="<div class='report'>" + lineZero + lineOne + lineTwo + lineThree + lineFour + lineFive + lineSix +"<hr></br></div>";
+    if ($(newReport).find('p').length === 0) {
+    $(newReport).append(template);}
+    else {$(newReport).find('.report').remove() }
+  }
+
   //
+
   //
-  // function retrieveReportIndex(){
-  //   $('a.reports-link').on('click', function(e){
-  //     e.preventDefault();
-  //     var link = $(this).attr('href')
-  //     $.getJSON($('a.reports-link').attr('href'), function(data){
-  //       if (data.length == 0) {
-  //         $(SELECTOR).html("There are no children registered yet")
-  //       }
-  //       else {
-  //       var reportList = ""
-        // data.forEach(function(details) {
-        //   var dailyReport = "<li class='rl'><a href= '/children/" + details.child_id + "/daily_reports/" + details.id + "'>" + details.date + "</a></li> ";
-        //   reportList += dailyReport;
-        // })
-        // $('.report-area').html(reportList);
-  //     };
-  //     })
-  //   })
-  // };
-  //
-  // function retrieveReport(){
-  //   $('.report-area').on('click', 'a', function(e){
-  //     e.preventDefault();
-  //     debugger;
-  //     newReport = $(this)
-  //     var url = $(this).attr('href')
-  //     $.getJSON(url, function(data){debugger;})
-  //     .done(buildDailyReport);
-  //   });
-  // };
+  function loadReport(){
+    $('.report-area').on('click', 'a', function(e){
+      e.preventDefault();
+      newReport = $(this).closest('div')
+      var url = $(this).attr('href')
+      $.getJSON(url, function(data){})
+      .done(buildDailyReport);
+    });
+  };
+
+  loadReport();
   //
   // function newFun(report){
   //   $('.funhouse').append(report.date);
