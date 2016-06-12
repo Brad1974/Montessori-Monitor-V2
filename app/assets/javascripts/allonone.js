@@ -63,7 +63,9 @@ ready = function() {
     var lineSeven = " <p> Current Diaper Inventory: " + this.diapers_inventory + "</p> "
     var lineEight = "<p><a href='/children/" + this.id + "/edit'>edit profile</a> - "
     var lineNine = "<a class ='delete' data-details='" + this.id + "' href='#'>delete profile</a></p>"
-    var template ="<div data-details='" + this.id + "' class='profile'>" + lineOne + lineTwo + lineThree + lineFour + lineFive + lineSix + lineSeven + lineEight + lineNine + "<hr></div>"
+    var lineTen = "<h4><a data-details='" + this.id + "' class='loadIndex' href='#'>View Daily Reports</a></h4>"
+    var lineEleven = "<div class='report-area'></div>"
+    var template ="<div data-details='" + this.id + "' class='profile'>" + lineOne + lineTwo + lineThree + lineFour + lineFive + lineSix + lineSeven + lineEight + lineNine + lineTen + lineEleven + "<hr></div>"
     if ($(childLine).find('p').length === 0) {
     $(childLine).append(template);}
     else {$(childLine).find('.profile').remove() }
@@ -87,14 +89,6 @@ ready = function() {
   deleteChild();
 
 
-
-
-
-
-
-
-
-
   function loadStats(){
     $('.class-stats').hide();
     $('#stat-button').on('click', function(){
@@ -102,6 +96,25 @@ ready = function() {
     })
   }
   loadStats();
+
+// daily report ajax functions
+
+function loadReportIndex(){
+  $('.roster').on('click', 'a.loadIndex', function(event){
+    var url = "/children/" + $(this).data('details') + "/daily_report_dates"
+    $.getJSON(url, function(data){
+      var reportList = "";
+      data.forEach(function(details) {
+      var dailyReport = "<div class='dr'><li class='rl'><a href= '/children/" + details[2] + "/daily_reports/" + details[1] + "'>" + details[0] + "</a></li></div> ";
+      reportList += dailyReport;
+      })
+      debugger;
+      $('.report-area').html(reportList);
+    })
+  })
+}
+loadReportIndex();
+
 
 };
 
