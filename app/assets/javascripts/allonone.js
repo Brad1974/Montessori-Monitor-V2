@@ -2,6 +2,9 @@ var childLine
 var ready;
 ready = function() {
 
+
+  // children ajax functions
+
   function loadRoster(){
     $.getJSON("/children", function(data){
       var childList = ""
@@ -58,7 +61,7 @@ ready = function() {
     var lineFive = " <p> Observed Receiving Acts of Kindness: " + this.gifts + "</p> "
     var lineSix = " <p> Allergies? " + this.allergies + "</p> "
     var lineSeven = " <p> Current Diaper Inventory: " + this.diapers_inventory + "</p> "
-    var lineEight = "<p><a data-details='" + this.id + "' href='#'>edit profile</a> - "
+    var lineEight = "<p><a href='/children/" + this.id + "/edit'>edit profile</a> - "
     var lineNine = "<a class ='delete' data-details='" + this.id + "' href='#'>delete profile</a></p>"
     var template ="<div data-details='" + this.id + "' class='profile'>" + lineOne + lineTwo + lineThree + lineFour + lineFive + lineSix + lineSeven + lineEight + lineNine + "<hr></div>"
     if ($(childLine).find('p').length === 0) {
