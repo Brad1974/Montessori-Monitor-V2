@@ -8,11 +8,6 @@ $(document).ready(function(){
 
 });
 
-
-var dataId
-
-
-
   // children ajax functions
 
   function loadRoster(){
@@ -32,7 +27,6 @@ var dataId
   }
 
 
-
   function loadProfile(){
     $('.roster').on('click', 'a.child-a', function(e){
       e.preventDefault();
@@ -44,12 +38,12 @@ var dataId
   }
 
 
-
   function buildChild(data){
     var locator = this.locator
     var newChild = new Child(data.id, data.last_name, data.first_name, data.birthdate, data.allergies, data.diapers_inventory, data.bully_rating, data.ouch_rating, data.kind_acts.length, data.gifts.length);
     newChild.insertIntoPage(locator);
   }
+
 
   function Child(id, last_name, first_name, birthdate, allergies, diapers_inventory, bully_rating, ouch_rating, kind_acts, gifts){
     this.last_name = last_name;
@@ -64,8 +58,8 @@ var dataId
     this.id = id
   }
 
-  Child.prototype.insertIntoPage = function(locator){
 
+  Child.prototype.insertIntoPage = function(locator){
     var lineOne = "<hr><p> Birthdate " + this.birthdate + "</p> "
     var lineTwo = "<p> Bully Rating: " + this.bully_rating + "</p> "
     var lineThree = "<p> Ouch Rating: " + this.ouch_rating + "</p> "
@@ -84,22 +78,20 @@ var dataId
     else {$(locator).find('.profile').remove() }
   }
 
+
   function deleteChild(){
     $('.roster').on('click', 'span#delete', function(event){
       var choice = confirm('Do you really want to delete this record?');
       if(choice === true) {
-      event.stopPropagation();
-      var url = "/children/" + $(this).data('details')
-      $.ajax({url: url, type: "DELETE"})
-      .done(function(success){
-        $('div [data-details=' +success.id +']').parent().remove()
-      });
-    };
-  });
-
+        event.stopPropagation();
+        var url = "/children/" + $(this).data('details')
+        $.ajax({url: url, type: "DELETE"})
+        .done(function(success){
+          $('div [data-details=' +success.id +']').parent().remove()
+        });
+      };
+    });
   };
-
-
 
 
   function loadStats(){
@@ -108,7 +100,6 @@ var dataId
       $('.class-stats').toggle();
     })
   }
-
 
 // daily report ajax functions
 
@@ -130,7 +121,6 @@ var dataId
   }
 
 
-
   function loadReport(){
     $('.roster').on('click', 'a.target', function(e){
       e.preventDefault();
@@ -142,12 +132,12 @@ var dataId
   };
 
 
-
   function buildDailyReport(data){
     var locator = this.locator
     var report = new DailyReport(data.child_id, data.date, data.poopy_diapers, data.wet_diapers, data.bullying_report, data.ouch_report, data.kind_acts, data.observations);
     report.insertIntoPage(locator);
   }
+
 
   function DailyReport(child_id, date, poopy_diapers, wet_diapers, bullying_report, ouch_report, kind_acts, observation){
     this.date = date;
@@ -160,11 +150,12 @@ var dataId
     this.observation = observation;
   }
 
+
   DailyReport.prototype.insertIntoPage = function(locator){
     var lineZero = "</br><hr><p> Date: " + this.date + "</p> ";
     var lineOne = "<p> Diaper Changes:</p><ul> ";
     var lineTwo = "<li> Wet Diapers: " + this.wet_diapers + "</li> ";
-    var lineThree = "<li> Poopy Diapers: " + this.poopy_diapers + "</li></ul> ";
+    var lineThree = "<li> Poopy Diapers: " + this.poopy_diapers + "</li></ul></br> ";
     if (this.bullying_report.length > 0) {
       var lineFour = "<p> Your child was a bully today: " + this.bullying_report + "</p> "} else {var lineFour = ""};
     if (this.ouch_report.length > 0) {
@@ -176,15 +167,3 @@ var dataId
       $(locator).append(template);}
     else {$(locator).find('.report').remove() }
   }
-
-
-
-
-
-
-
-
-// };
-//
-// $(document).ready(ready);
-// $(document).on('page:load', ready);
