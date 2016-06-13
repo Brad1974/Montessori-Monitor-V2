@@ -1,8 +1,16 @@
-var childLine;
-var newReport;
+$(document).ready(function(){
+  loadRoster();
+  loadProfile();
+  deleteChild();
+  loadStats();
+  loadReportIndex();
+  loadReport();
+
+});
+
+
 var dataId
-var ready;
-ready = function() {
+
 
 
   // children ajax functions
@@ -23,23 +31,24 @@ ready = function() {
     })
   }
 
-  loadRoster();
+
 
   function loadProfile(){
     $('.roster').on('click', 'a.child-a', function(e){
       e.preventDefault();
-      childLine = $(this).closest('div')
+      var childLine = $(this).closest('div')
       var url = $(this).attr('href')
-      $.getJSON(url, function(data){})
+      $.getJSON({url:url, locator: childLine}, function(data){})
       .done(buildChild)
     })
   }
 
-  loadProfile();
+
 
   function buildChild(data){
+    var locator = this.locator
     var newChild = new Child(data.id, data.last_name, data.first_name, data.birthdate, data.allergies, data.diapers_inventory, data.bully_rating, data.ouch_rating, data.kind_acts.length, data.gifts.length);
-    newChild.insertIntoPage();
+    newChild.insertIntoPage(locator);
   }
 
   function Child(id, last_name, first_name, birthdate, allergies, diapers_inventory, bully_rating, ouch_rating, kind_acts, gifts){
@@ -55,7 +64,7 @@ ready = function() {
     this.id = id
   }
 
-  Child.prototype.insertIntoPage = function(){
+  Child.prototype.insertIntoPage = function(locator){
 
     var lineOne = "<hr><p> Birthdate " + this.birthdate + "</p> "
     var lineTwo = "<p> Bully Rating: " + this.bully_rating + "</p> "
@@ -70,9 +79,9 @@ ready = function() {
     var lineTen1 = "<div class='report-area' data-details='" + this.id + "'></div>"
     var lineEleven = "<h4><a href='/children/" + this.id + "/daily_reports/new'>Write a new report</a></h4>"
     var template ="<div data-details='" + this.id + "' class='profile'>" + lineOne + lineTwo + lineThree + lineFour + lineFive + lineSix + lineSeven + lineEight + lineNine + lineTen + lineTen1+ lineEleven +"<hr></div>"
-    if ($(childLine).find('p').length === 0) {
-    $(childLine).append(template);}
-    else {$(childLine).find('.profile').remove() }
+    if ($(locator).find('p').length === 0) {
+    $(locator).append(template);}
+    else {$(locator).find('.profile').remove() }
   }
 
   function deleteChild(){
@@ -90,7 +99,7 @@ ready = function() {
 
   };
 
-  deleteChild();
+
 
 
   function loadStats(){
@@ -99,7 +108,7 @@ ready = function() {
       $('.class-stats').toggle();
     })
   }
-  loadStats();
+
 
 // daily report ajax functions
 
@@ -108,7 +117,7 @@ ready = function() {
       var url = "/children/" + $(this).data('details') + "/daily_reports"
       $.getJSON(url, function(data){
         var reportList = "";
-        dataId = data[0][2];
+        var dataId = data[0][2];
         data.forEach(function(details) {
           var dailyReport = "<div class='dr><li class='rl'><a class='target' href= '/children/" + details[2] + "/daily_reports/" + details[1] + "'>" + details[0] + "</a></li></div> ";
           reportList += dailyReport;
@@ -120,23 +129,24 @@ ready = function() {
     })
   }
 
-  loadReportIndex();
+
 
   function loadReport(){
     $('.roster').on('click', 'a.target', function(e){
       e.preventDefault();
-      newReport = $(this).closest('div')
+      var newReport = $(this).closest('div')
       var url = $(this).attr('href')
-      $.getJSON(url, function(data){})
+      $.getJSON({url: url, locator: newReport}, function(data){})
       .done(buildDailyReport);
     });
   };
 
-  loadReport();
+
 
   function buildDailyReport(data){
-    report = new DailyReport(data.child_id, data.date, data.poopy_diapers, data.wet_diapers, data.bullying_report, data.ouch_report, data.kind_acts, data.observations);
-    report.insertIntoPage();
+    var locator = this.locator
+    var report = new DailyReport(data.child_id, data.date, data.poopy_diapers, data.wet_diapers, data.bullying_report, data.ouch_report, data.kind_acts, data.observations);
+    report.insertIntoPage(locator);
   }
 
   function DailyReport(child_id, date, poopy_diapers, wet_diapers, bullying_report, ouch_report, kind_acts, observation){
@@ -150,7 +160,7 @@ ready = function() {
     this.observation = observation;
   }
 
-  DailyReport.prototype.insertIntoPage = function(){
+  DailyReport.prototype.insertIntoPage = function(locator){
     var lineZero = "</br><hr><p> Date: " + this.date + "</p> ";
     var lineOne = "<p> Diaper Changes:</p><ul> ";
     var lineTwo = "<li> Wet Diapers: " + this.wet_diapers + "</li> ";
@@ -162,14 +172,19 @@ ready = function() {
     if (this.kind_acts.length > 0) {
       var lineSix = "<p> We observed your child do something kind today: " + this.kind_acts[0].act + "</p>"} else {var lineSix = ""};
     var template ="<div class='report'>" + lineZero + lineOne + lineTwo + lineThree + lineFour + lineFive + lineSix +"<hr></br></div>";
-    if ($(newReport).find('p').length === 0) {
-      $(newReport).append(template);}
-    else {$(newReport).find('.report').remove() }
+    if ($(locator).find('p').length === 0) {
+      $(locator).append(template);}
+    else {$(locator).find('.report').remove() }
   }
 
 
 
-};
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+
+
+
+
+// };
+//
+// $(document).ready(ready);
+// $(document).on('page:load', ready);

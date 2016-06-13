@@ -1,3 +1,54 @@
+// $(document).ready(function(){
+// tryThis();
+//
+// });
+//
+//
+//
+//
+// function tryThis(){
+//   var newOne="Daniel"
+//   $.getJSON({url: '/children', locator: newOne}, function(data){
+//     debugger;
+//   }).done(buildChild)
+// }
+//
+//
+//
+//
+//
+//
+// // function tryThis(){
+// //   $('.exp').on('click', function(event){
+// //     var newOne = "daniel"
+// //     $.ajax({url: '/children', dataType: 'JSON', type: 'GET', locator: 'Sarah', success: function(){alert()}})
+// //     .done(function(hmm){
+// //       debugger;
+// //     })
+// //
+// //   })
+// // }
+//
+//
+//
+//
+//
+// //
+// //
+// function buildChild(data){
+//   debugger;
+// }
+//
+//
+//
+//
+// $.ajax({url: url, type: "DELETE"})
+// .done(function(success){
+//   $('div [data-details=' +success.id +']').parent().remove()
+// });
+
+
+
 // var newReport
 // var ready;
 // ready = function() {
