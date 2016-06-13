@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  get '/children_names' => 'children#indexnames', as: :nameindex
-
   resources :children do
     resources :daily_reports
-    get '/daily_report_dates' => 'daily_reports#indexdates', as: :dateindex
   end
   resources :observations
   resources :kind_acts

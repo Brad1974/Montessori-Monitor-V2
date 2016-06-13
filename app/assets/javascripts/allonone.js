@@ -8,11 +8,9 @@ ready = function() {
   // children ajax functions
 
   function loadRoster(){
-    $.getJSON("/children_names/", function(data){
+    $.getJSON("/children/", function(data){
       var childList = ""
       data.forEach(function(details) {
-
-
         var link = "<div class='child-line'><li><a class='child-a' href = '/children/" + details[2] + "'>" + details[0] + " " + details[1] +"</a></li></div> "
         // var link = "<div class='child-line'><li><a class= 'child-a' href= '/children/" + details.id + "'>" + details.first_name + " " + details.last_name + "</a></li></div> ";
         childList += link;
@@ -67,7 +65,7 @@ ready = function() {
     var lineSix = " <p> Allergies? " + this.allergies + "</p> "
     var lineSeven = " <p> Current Diaper Inventory: " + this.diapers_inventory + "</p> "
     var lineEight = "<p><a href='/children/" + this.id + "/edit'>edit profile</a> - "
-    var lineNine = "<a class ='delete' data-details='" + this.id + "' href='#'>delete profile</a></p>"
+    var lineNine = "<span class='fake-link' id='delete' data-details='" + this.id + "'>delete profile</span/</p> "
     var lineTen = "<h4><span class='fake-link' id='loadIndex' data-details='" + this.id + "'>View Daily Reports</span></h4>"
     var lineTen1 = "<div class='report-area' data-details='" + this.id + "'></div>"
     var lineEleven = "<h4><a href='/children/" + this.id + "/daily_reports/new'>Write a new report</a></h4>"
@@ -78,7 +76,7 @@ ready = function() {
   }
 
   function deleteChild(){
-    $('.roster').on('click', 'a.delete', function(event){
+    $('.roster').on('click', 'span#delete', function(event){
       var choice = confirm('Do you really want to delete this record?');
       if(choice === true) {
       event.stopPropagation();
@@ -88,7 +86,7 @@ ready = function() {
         $('div [data-details=' +success.id +']').parent().remove()
       });
     };
-    });
+  });
 
   };
 
@@ -107,7 +105,7 @@ ready = function() {
 
   function loadReportIndex(){
     $('.roster').on('click', 'span#loadIndex', function(event){
-      var url = "/children/" + $(this).data('details') + "/daily_report_dates"
+      var url = "/children/" + $(this).data('details') + "/daily_reports"
       $.getJSON(url, function(data){
         var reportList = "";
         dataId = data[0][2];
@@ -168,7 +166,6 @@ ready = function() {
       $(newReport).append(template);}
     else {$(newReport).find('.report').remove() }
   }
-
 
 
 

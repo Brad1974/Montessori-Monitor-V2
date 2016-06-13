@@ -2,7 +2,7 @@ class DailyReportsController < ApplicationController
   before_action :set_child
 
   def index
-    @daily_reports = @child.daily_reports
+    @daily_reports = @child.daily_reports.collect {|d| [d.date, d.id, d.child_id]}
     render json: @daily_reports
     # respond_to do |format|
     #   format.html { render :index }
@@ -10,10 +10,6 @@ class DailyReportsController < ApplicationController
     # end
   end
 
-  def indexdates
-    @daily_reportdates = @child.daily_reports.collect {|d| [d.date, d.id, d.child_id]}
-    render json: @daily_reportdates
-  end
 
   def show
     @daily_report = @child.daily_reports.find(params[:id])
@@ -34,9 +30,10 @@ class DailyReportsController < ApplicationController
     @daily_report = @child.daily_reports.build(daily_report_params)
     if @daily_report.save
       @child.update_child_stats(@daily_report)
-      #render json: @daily_report
-      #redirect_to child_path(@child)
-      
+
+      #render json: @daily_report, status: 201
+      redirect_to root_path
+
     else
       render :new
     end

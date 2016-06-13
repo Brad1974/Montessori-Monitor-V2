@@ -1,17 +1,13 @@
 class ChildrenController < ApplicationController
 before_action :authenticate_user!#, except: [:index]
   def index
-    @children = Child.all
+    @children = Child.all.collect {|c| [c.first_name, c.last_name, c.id]}
+
     # render json: @children
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @children }
     end
-  end
-
-  def indexnames
-    @children_names = Child.all.collect {|c| [c.first_name, c.last_name, c.id]}
-    render json: @children_names
   end
 
   def newindex
@@ -52,7 +48,7 @@ before_action :authenticate_user!#, except: [:index]
   def update
     @child = Child.find(params[:id])
     if @child.update(child_params)
-      redirect_to child_path(@child)
+      redirect_to root_path
     else
       render :edit
     end
