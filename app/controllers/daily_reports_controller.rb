@@ -34,7 +34,9 @@ class DailyReportsController < ApplicationController
     @daily_report = @child.daily_reports.build(daily_report_params)
     if @daily_report.save
       @child.update_child_stats(@daily_report)
-      redirect_to child_path(@child)
+      #render json: @daily_report
+      #redirect_to child_path(@child)
+      
     else
       render :new
     end

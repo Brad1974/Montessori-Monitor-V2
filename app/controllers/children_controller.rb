@@ -9,7 +9,12 @@ before_action :authenticate_user!#, except: [:index]
     end
   end
 
-  def allononepage
+  def indexnames
+    @children_names = Child.all.collect {|c| [c.first_name, c.last_name, c.id]}
+    render json: @children_names
+  end
+
+  def newindex
     render :allononepage
   end
 

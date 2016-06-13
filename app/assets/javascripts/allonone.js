@@ -1,4 +1,6 @@
-var childLine
+var childLine;
+var newReport;
+var dataId
 var ready;
 ready = function() {
 
@@ -6,10 +8,13 @@ ready = function() {
   // children ajax functions
 
   function loadRoster(){
-    $.getJSON("/children", function(data){
+    $.getJSON("/children_names/", function(data){
       var childList = ""
       data.forEach(function(details) {
-        var link = "<div class='child-line'><li><a class= 'child-a' href= '/children/" + details.id + "'>" + details.first_name + " " + details.last_name + "</a></li></div> ";
+
+
+        var link = "<div class='child-line'><li><a class='child-a' href = '/children/" + details[2] + "'>" + details[0] + " " + details[1] +"</a></li></div> "
+        // var link = "<div class='child-line'><li><a class= 'child-a' href= '/children/" + details.id + "'>" + details.first_name + " " + details.last_name + "</a></li></div> ";
         childList += link;
       })
       if (childList.length > 0) {
@@ -63,9 +68,10 @@ ready = function() {
     var lineSeven = " <p> Current Diaper Inventory: " + this.diapers_inventory + "</p> "
     var lineEight = "<p><a href='/children/" + this.id + "/edit'>edit profile</a> - "
     var lineNine = "<a class ='delete' data-details='" + this.id + "' href='#'>delete profile</a></p>"
-    var lineTen = "<h4><a data-details='" + this.id + "' class='loadIndex' href='#'>View Daily Reports</a></h4>"
-    var lineEleven = "<div class='report-area'></div>"
-    var template ="<div data-details='" + this.id + "' class='profile'>" + lineOne + lineTwo + lineThree + lineFour + lineFive + lineSix + lineSeven + lineEight + lineNine + lineTen + lineEleven + "<hr></div>"
+    var lineTen = "<h4><span class='fake-link' id='loadIndex' data-details='" + this.id + "'>View Daily Reports</span></h4>"
+    var lineTen1 = "<div class='report-area' data-details='" + this.id + "'></div>"
+    var lineEleven = "<h4><a href='/children/" + this.id + "/daily_reports/new'>Write a new report</a></h4>"
+    var template ="<div data-details='" + this.id + "' class='profile'>" + lineOne + lineTwo + lineThree + lineFour + lineFive + lineSix + lineSeven + lineEight + lineNine + lineTen + lineTen1+ lineEleven +"<hr></div>"
     if ($(childLine).find('p').length === 0) {
     $(childLine).append(template);}
     else {$(childLine).find('.profile').remove() }
@@ -99,21 +105,71 @@ ready = function() {
 
 // daily report ajax functions
 
-function loadReportIndex(){
-  $('.roster').on('click', 'a.loadIndex', function(event){
-    var url = "/children/" + $(this).data('details') + "/daily_report_dates"
-    $.getJSON(url, function(data){
-      var reportList = "";
-      data.forEach(function(details) {
-      var dailyReport = "<div class='dr'><li class='rl'><a href= '/children/" + details[2] + "/daily_reports/" + details[1] + "'>" + details[0] + "</a></li></div> ";
-      reportList += dailyReport;
+  function loadReportIndex(){
+    $('.roster').on('click', 'span#loadIndex', function(event){
+      var url = "/children/" + $(this).data('details') + "/daily_report_dates"
+      $.getJSON(url, function(data){
+        var reportList = "";
+        dataId = data[0][2];
+        data.forEach(function(details) {
+          var dailyReport = "<div class='dr><li class='rl'><a class='target' href= '/children/" + details[2] + "/daily_reports/" + details[1] + "'>" + details[0] + "</a></li></div> ";
+          reportList += dailyReport;
+        })
+        if ($('.report-area[data-details=' + dataId +']').children().length === 0) {
+        $('.report-area[data-details=' + dataId +']').html(reportList);}
+        else {$('.report-area[data-details=' + dataId +']').html("");};
       })
-      debugger;
-      $('.report-area').html(reportList);
     })
-  })
-}
-loadReportIndex();
+  }
+
+  loadReportIndex();
+
+  function loadReport(){
+    $('.roster').on('click', 'a.target', function(e){
+      e.preventDefault();
+      newReport = $(this).closest('div')
+      var url = $(this).attr('href')
+      $.getJSON(url, function(data){})
+      .done(buildDailyReport);
+    });
+  };
+
+  loadReport();
+
+  function buildDailyReport(data){
+    report = new DailyReport(data.child_id, data.date, data.poopy_diapers, data.wet_diapers, data.bullying_report, data.ouch_report, data.kind_acts, data.observations);
+    report.insertIntoPage();
+  }
+
+  function DailyReport(child_id, date, poopy_diapers, wet_diapers, bullying_report, ouch_report, kind_acts, observation){
+    this.date = date;
+    this.poopy_diapers = poopy_diapers;
+    this.wet_diapers = wet_diapers;
+    this.bullying_report = bullying_report;
+    this.ouch_report = ouch_report;
+    this.child_id = child_id;
+    this.kind_acts = kind_acts;
+    this.observation = observation;
+  }
+
+  DailyReport.prototype.insertIntoPage = function(){
+    var lineZero = "</br><hr><p> Date: " + this.date + "</p> ";
+    var lineOne = "<p> Diaper Changes:</p><ul> ";
+    var lineTwo = "<li> Wet Diapers: " + this.wet_diapers + "</li> ";
+    var lineThree = "<li> Poopy Diapers: " + this.poopy_diapers + "</li></ul> ";
+    if (this.bullying_report.length > 0) {
+      var lineFour = "<p> Your child was a bully today: " + this.bullying_report + "</p> "} else {var lineFour = ""};
+    if (this.ouch_report.length > 0) {
+      var lineFive = "<p> Your child got an ouchie today: " + this.ouch_report + "</p>"} else {var lineFive = ""};
+    if (this.kind_acts.length > 0) {
+      var lineSix = "<p> We observed your child do something kind today: " + this.kind_acts[0].act + "</p>"} else {var lineSix = ""};
+    var template ="<div class='report'>" + lineZero + lineOne + lineTwo + lineThree + lineFour + lineFive + lineSix +"<hr></br></div>";
+    if ($(newReport).find('p').length === 0) {
+      $(newReport).append(template);}
+    else {$(newReport).find('.report').remove() }
+  }
+
+
 
 
 };

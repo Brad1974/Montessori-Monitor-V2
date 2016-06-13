@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  get '/children_names' => 'children#indexnames', as: :nameindex
+
   resources :children do
     resources :daily_reports
     get '/daily_report_dates' => 'daily_reports#indexdates', as: :dateindex
@@ -8,9 +11,9 @@ Rails.application.routes.draw do
   resources :kind_acts
   resources :guides
 
-  root 'children#index'
+  root 'children#newindex'
 
-  get '/singlepageapp' => 'children#allononepage'
+  get '/home' => 'children#newindex'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
