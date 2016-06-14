@@ -35,7 +35,7 @@ before_action :authenticate_user!#, except: [:index]
   def create
     @child = Child.new(child_params)
     if @child.save
-      redirect_to child_path(@child)
+      redirect_to root_path
     else
       render :new
     end
